@@ -1,0 +1,99 @@
+<?php
+require 'dbconfig/config.php';
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Registration
+    </title>
+    <link rel="icon" href="icons/_software/_SVG/software_add_vectorpoint.svg" type="image/x-ixon">
+    <link rel="stylesheet" href="css/icon-social.css">
+    <link rel="stylesheet" href="css/icon-styles.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<section class="section-registration">
+    <div class="row">
+        <div class="registration">
+            <div class="registration__form">
+
+                <form action="registrartion.php" class="form" method="post">
+
+                    <div class="u-margin-bottom-medium">
+                        <h2>
+                            Registration
+
+                        </h2>
+                    </div>
+
+                    <div class="form__group">
+                        <input type="text" id="name" class="form__input form__input-name" required placeholder="Full Name" autocomplete="off" name="name">
+                        <label for="name" class="form__label">Full Name</label>
+                    </div>
+                    <div class="form__group">
+                        <input type="password" id="password" class="form__input " required placeholder="Password" autocomplete="off" name="Password">
+                        <label for="password" class="form__label">Password</label>
+                    </div>
+                    <div class="form__group">
+                        <input type="password" id="password-2" class="form__input " required placeholder="Confirm Password" autocomplete="off" name="RePassword">
+                        <label for="password" class="form__label">Confirm Password
+                        </label>
+                    </div>
+
+                    <div class="form__group">
+                        <input type="email" id="email" class="form__input form__input-name" required placeholder="Email Address" autocomplete="off" name="email">
+                        <label for="email" class="form__label">Email Address</label>
+                    </div>
+
+                     <div class="form__group">
+                        <input type="tel" id="number" class="form__input form__input-name" required placeholder="Number" autocomplete="off" name="Number">
+                        <label for="Number" class="form__label">Number</label>
+                    </div>
+                    <input type="submit" name="button-submit" class="button button--black" value="Submit" id="submit"/>
+
+                    <a href="login.php" class="registration__link">Already have account ?</a>
+                </form>
+
+                <?php
+                  if(isset($_POST['button-submit']))
+                  {
+                     //echo '<script type="text/javascript"> alert ("Registration Done Sucessfully")</script>';
+                      $name = $_POST['name'];
+                      $password = $_POST['Password'];
+                      $cpassword = $_POST['RePassword'];
+                      $email = $_POST['email'];
+                      $number = $_POST['Number'];
+
+                      if($password==$cpassword)
+                    /*  {
+                          $query = "select * from user WHERE name='$name'";
+                          $query_run = mysqli_query($con,$query);
+
+                          if(mysqli_num_rows($query_run)>0)
+                          {
+                              //There is any exieset username
+
+                              echo '<script type="text/javascript"> alert ("User Already exists ")</script>';
+                          }
+                        */
+                          {
+                              $query = "insert into USER values ('$name','$password','$email','$number')";
+                              $query_run = mysqli_query($con,$query);
+
+                              if($query_run){
+                                  echo '<script type="text/javascript"> alert ("User Registered ")</script>';
+                              }
+                              else {
+                                  echo '<script type="text/javascript"> alert ("Error ")</script>';
+                              }
+                          }
+
+                  }
+                ?>
+    </div>
+</section>
+</body>
+</html>
